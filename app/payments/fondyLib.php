@@ -32,10 +32,11 @@ class FondyCls
         if ($response['order_status'] == self::ORDER_DECLINED) {
             return 'An error has occurred during payment. Order is declined.';
         }
-		$originalResponse = $response;
-        $strs = explode(self::SIGNATURE_SEPARATOR, $originalResponse['response_signature_string']);
-        $str = (str_replace($strs[0],$fondySettings['secret_key'],$originalResponse['response_signature_string']));
-        if (sha1($str) != $originalResponse['signature']) {
+		
+		$responseSignature = $response['signature'];
+        unset($response['response_signature_string']);
+		unset($response['signature']);
+		if (self::getSignature($response, $fondySettings['secret_key']) != $responseSignature) {
             return 'An error has occurred during payment. Signature is not valid.';
         }
 
