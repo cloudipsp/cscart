@@ -23,6 +23,7 @@
 	<label class="control-label" for="fondy_currency">{__("currency")}:</label>
 	<div class="controls">
 		<select name="payment_data[processor_params][currency]" id="fondy_currency">
+			<option value="shop_cur"{if $processor_params.currency == "shop_cur"} selected="selected"{/if}>{__("primary_currency")}</option>
 			<option value="EUR"{if $processor_params.currency == "EUR"} selected="selected"{/if}>{__("currency_code_eur")}</option>
 			<option value="USD"{if $processor_params.currency == "USD"} selected="selected"{/if}>{__("currency_code_usd")}</option>
 			<option value="GBP"{if $processor_params.currency == "GBP"} selected="selected"{/if}>{__("currency_code_gbp")}</option>

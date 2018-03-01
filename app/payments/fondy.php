@@ -19,7 +19,7 @@ if (defined('PAYMENT_NOTIFICATION')) {
             'secret_key' =>  $processor_data['processor_params']['fondy_merchnatSecretKey']);
 		$response = FondyCls::isPaymentValid($option, $_POST);
 		
-        if ($response == true && $order_info['status'] == 'N') {
+        if ($response === true && $order_info['status'] == 'N') {
 			if($_REQUEST['order_status'] == FondyCls::ORDER_APPROVED) {
 				$pp_response['order_status'] = 'P';
 				$pp_response['reason_text'] = __('transaction_approved');
@@ -47,7 +47,13 @@ if (defined('PAYMENT_NOTIFICATION')) {
 	} else {
 		
 	$payment_url = FondyCls::URL;
-	$amount = fn_format_price($order_info['total'], $processor_data['processor_params']['currency']);
+	$currency_f =  CART_SECONDARY_CURRENCY;
+	if ($processor_data['processor_params']['currency'] == 'shop_cur'){
+		$amount = fn_format_price_by_currency( $order_info['total'] );
+	}else {
+		$amount = fn_format_price( $order_info['total'], $processor_data['processor_params']['currency'] );
+		$currency_f = $processor_data['processor_params']['currency'];
+	}
 	$confirm_url = fn_url("payment_notification.sucsses?payment=fondy&order_id=$order_id", AREA, 'current');
 	$response_url = fn_url("payment_notification.response?payment=fondy&order_id=$order_id", AREA, 'current');
 
@@ -57,7 +63,7 @@ if (defined('PAYMENT_NOTIFICATION')) {
 		'order_id' => time() . $order_id,
 		'order_desc' => '#' . $order_id,
 		'amount' => round($amount * 100),
-		'currency' => $processor_data['processor_params']['currency'],
+		'currency' => $currency_f,
 		'server_callback_url' => $confirm_url,
 		'response_url' => $response_url
 	);
@@ -67,4 +73,3 @@ if (defined('PAYMENT_NOTIFICATION')) {
 	fn_create_payment_form($payment_url, $post_data, 'Fondy', false);
 	exit;
 }
-
