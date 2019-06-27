@@ -1,5 +1,5 @@
 <?php
-use Tygh\Storage;
+
 class FondyCls
 {
     const ORDER_APPROVED = 'approved';
@@ -10,7 +10,7 @@ class FondyCls
 
     public static function getSignature($data, $password, $encoded = true)
     {
-        $data = array_filter($data, function($var) {
+        $data = array_filter($data, function ($var) {
             return $var !== '' && $var !== null;
         });
         ksort($data);
@@ -24,6 +24,7 @@ class FondyCls
             return $str;
         }
     }
+
     public static function isPaymentValid($fondySettings, $response)
     {
         if ($fondySettings['merchant_id'] != $response['merchant_id']) {
@@ -32,20 +33,18 @@ class FondyCls
         if ($response['order_status'] == self::ORDER_DECLINED) {
             return 'An error has occurred during payment. Order is declined.';
         }
-		
-		$responseSignature = $response['signature'];
-		if (isset($response['response_signature_string'])){
-			unset($response['response_signature_string']);
-		}
-		if (isset($response['signature'])){
-			unset($response['signature']);
-		}
-		if (self::getSignature($response, $fondySettings['secret_key']) != $responseSignature) {
+
+        $responseSignature = $response['signature'];
+        if (isset($response['response_signature_string'])) {
+            unset($response['response_signature_string']);
+        }
+        if (isset($response['signature'])) {
+            unset($response['signature']);
+        }
+        if (self::getSignature($response, $fondySettings['secret_key']) != $responseSignature) {
             return 'An error has occurred during payment. Signature is not valid.';
         }
 
         return true;
     }
 }
-
-?>
