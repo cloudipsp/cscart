@@ -32,11 +32,19 @@ function fn_fondy_change_order_status(&$status_to, $status_from, $order_info, $f
 
     $processor_data = fn_get_processor_data($order_info['payment_id']);
 
+    $currency_f = CART_SECONDARY_CURRENCY;
+    if ($processor_data['processor_params']['currency'] == 'shop_cur') {
+        $amount = fn_format_price_by_currency($order_info['total']);
+    } else {
+        $amount = fn_format_price($order_info['total'], $processor_data['processor_params']['currency']);
+        $currency_f = $processor_data['processor_params']['currency'];
+    }
+
     if ($processor_data['processor_params']['status_hold'] == $status_from && $status_to == 'P') {
         $payment_data = [
             'order_id' => ($order_info['payment_info']['order_id']) ? $order_info['payment_info']['order_id'] : $order_info['payment_info']['fondy_order_id'],
-            'currency' => $processor_data['processor_params']['currency'],
-            'amount' => round($order_info['total'] * 100),
+            'currency' => $currency_f,
+            'amount' => round($amount * 100),
             'merchant_id' => $processor_data['processor_params']['merchant_id'],
         ];
 
