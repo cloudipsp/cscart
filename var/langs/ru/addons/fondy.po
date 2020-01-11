@@ -52,7 +52,7 @@ msgctxt "Languages::addons.fondy.status_hold"
 msgid "Статус заказа с замороженными средствами"
 msgstr "Статус заказа с замороженными средствами"
 
-
-
-
+msgctxt "Languages::addons.fondy.paid_order_status"
+msgid "Статус оплаченого заказа"
+msgstr "Статус оплаченого заказа"
 

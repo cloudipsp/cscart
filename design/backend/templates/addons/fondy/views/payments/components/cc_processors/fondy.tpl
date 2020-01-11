@@ -69,10 +69,22 @@
     </div>
 </div>
 
+<div class="control-group" id="row_paid_order_status">
+    <label class="control-label" for="paid_order_status">{__("addons.fondy.paid_order_status")}</label>
+    <div class="controls">
+        <select name="payment_data[processor_params][paid_order_status]" id="paid_order_status">
+            {foreach from=$statuses item="s" key="k"}
+                <option value="{$k}" {if $processor_params.paid_order_status == $k}selected="selected"{/if}>{$s}</option>
+            {/foreach}
+        </select>
+    </div>
+</div>
+
 <div class="control-group">
     <label class="control-label" for="currency">{__("addons.fondy.currency")}:</label>
     <div class="controls">
         <select name="payment_data[processor_params][currency]" id="currency">
+            <option value="shop_cur"{if $processor_params.currency == "shop_cur"} selected="selected"{/if}>{__("primary_currency")}</option>
             {foreach from=$currency item="s" key="k"}
                 <option value="{$k}" {if $processor_params.currency == $k}selected="selected"{/if}>{$k}</option>
             {/foreach}

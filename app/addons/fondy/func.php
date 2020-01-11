@@ -40,7 +40,7 @@ function fn_fondy_change_order_status(&$status_to, $status_from, $order_info, $f
         $currency_f = $processor_data['processor_params']['currency'];
     }
 
-    if ($processor_data['processor_params']['status_hold'] == $status_from && $status_to == 'P') {
+    if ($processor_data['processor_params']['status_hold'] == $status_from && $status_to == $processor_data['processor_params']['paid_order_status']) {
         $payment_data = [
             'order_id' => ($order_info['payment_info']['order_id']) ? $order_info['payment_info']['order_id'] : $order_info['payment_info']['fondy_order_id'],
             'currency' => $currency_f,
