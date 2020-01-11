@@ -52,4 +52,7 @@ msgctxt "Languages::addons.fondy.status_hold"
 msgid "Order status with hold funds"
 msgstr "Order status with hold funds"
 
+msgctxt "Languages::addons.fondy.paid_order_status"
+msgid "Paid order status"
+msgstr "Paid order status"
 

@@ -26,8 +26,15 @@ if (defined('PAYMENT_NOTIFICATION')) {
 
     if ($response === true) {
         if ($mode == 'ok' && $body['order_status'] == 'approved') {
+
+            if ($order_info['status'] == $processor_data['processor_params']['paid_order_status'] && $processor_data['processor_params']['transaction_method'] == 'hold') {
+                $order_status = $processor_data['processor_params']['paid_order_status'];
+            } else {
+                $order_status = ($processor_data['processor_params']['transaction_method'] == 'hold') ? $processor_data['processor_params']['status_hold'] : $processor_data['processor_params']['paid_order_status'];
+            }
+
             $pp_response = [
-                'order_status' => ($processor_data['processor_params']['transaction_method'] == 'hold') ? $processor_data['processor_params']['status_hold'] : 'P',
+                'order_status' => $order_status,
                 'payment_id' => $body['payment_id'],
             ];
         } else {
@@ -43,7 +50,7 @@ if (defined('PAYMENT_NOTIFICATION')) {
         fn_redirect('/cart');
         exit();
     }
-    $pp_response = ['order_status' => ($processor_data['processor_params']['transaction_method'] == 'hold') ? $processor_data['processor_params']['status_hold'] : 'P'];
+    $pp_response = ['order_status' => ($processor_data['processor_params']['transaction_method'] == 'hold') ? $processor_data['processor_params']['status_hold'] : $processor_data['processor_params']['paid_order_status']];
     fn_finish_payment($order_id, $pp_response);
     fn_clear_cart($_SESSION['cart']);
     fn_redirect('/cart');
