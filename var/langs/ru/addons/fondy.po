@@ -1,0 +1,58 @@
+msgid ""
+msgstr "Project-Id-Version: tygh\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Russian\n"
+"Language: ru_RU"
+
+msgctxt "Addons::name::fondy"
+msgid "Fondy"
+msgstr "Fondy"
+
+msgctxt "Addons::description::fondy"
+msgid "Fondy описание"
+msgstr "Прием платежей через Fondy (VISA, Visa Electron, Maestro, MasterCard)"
+
+msgctxt "Languages::addons.fondy.merchant_id"
+msgid "Merchant ID"
+msgstr "Merchant ID"
+
+msgctxt "Languages::addons.fondy.password"
+msgid "Пароль"
+msgstr "Пароль"
+
+msgctxt "Languages::addons.fondy.language"
+msgid "Язык"
+msgstr "Язык"
+
+msgctxt "Languages::addons.fondy.currency"
+msgid "Валюта"
+msgstr "Валюта"
+
+msgctxt "Languages::addons.fondy.payment_type"
+msgid "Payment type"
+msgstr "Payment type"
+
+msgctxt "Languages::addons.fondy.transaction_method"
+msgid "Transaction method"
+msgstr "Transaction method"
+
+msgctxt "Languages::addons.fondy.test_mode"
+msgid "Test mode"
+msgstr "Test mode"
+
+msgctxt "Languages::hold"
+msgid "Hold"
+msgstr "Hold"
+
+msgctxt "Languages::Redirect to Fondy"
+msgid "Redirect to Fondy"
+msgstr "Redirect to Fondy"
+
+msgctxt "Languages::addons.fondy.status_hold"
+msgid "Статус заказа с замороженными средствами"
+msgstr "Статус заказа с замороженными средствами"
+
+
+
+
+

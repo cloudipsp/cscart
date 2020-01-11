@@ -1,18 +1,16 @@
 <?xml version="1.0"?>
-	<addon scheme="2.0">
-		<id>fondy</id>
-		<name>Fondy</name>
-		<copyright>fondy.eu</copyright>
-		<authorEmail>dmmatrix222@gmail.com</authorEmail>
-		<version>1.0.1</version>
-		<description>www.fondy.eu (VISA, MasterCard, и др.)</description>
-		<priority>1</priority>
-		<dependencies></dependencies>
-		<queries>
-			<item for="install">
-        INSERT INTO `?:payment_processors` (`processor_id`, `processor`, `processor_script`, `processor_template`, `admin_template`, `callback`, `type`) VALUES 
-        ('', 'Fondy', 'fondy.php', 'views/orders/components/payments/cc_outside.tpl', 'fondy.tpl', 'N', 'P')
-			</item>
-			<item for="uninstall">DELETE FROM ?:payment_processors WHERE processor = 'Fondy'</item>
-		</queries>
-	</addon>
+<addon scheme="3.0" edition_type="ROOT,ULT:VENDOR">
+    <id>fondy</id>
+    <name>Fondy</name>
+    <copyright>fondy.eu</copyright>
+    <authorEmail>dmmatrix222@gmail.com</authorEmail>
+    <version>1.0.1</version>
+    <description>www.fondy.eu (VISA, MasterCard, и др.)</description>
+    <priority>1</priority>
+    <status>active</status>
+    <dependencies></dependencies>
+    <functions>
+        <item for="install">fn_fondy_install</item>
+        <item for="uninstall">fn_fondy_uninstall</item>
+    </functions>
+</addon>
