@@ -25,6 +25,15 @@ if (defined('PAYMENT_NOTIFICATION')) {
     ], $body);
 
     if ($response === true) {
+
+        if($mode == 'response') {
+            $pp_response = ['order_status' => ($processor_data['processor_params']['transaction_method'] == 'hold') ? $processor_data['processor_params']['status_hold'] : $processor_data['processor_params']['paid_order_status']];
+            fn_finish_payment($order_id, $pp_response);
+            fn_clear_cart($_SESSION['cart']);
+            fn_order_placement_routines('route', $order_id);
+            exit();
+        }
+
         if ($mode == 'ok' && $body['order_status'] == 'approved') {
 
             if ($order_info['status'] == $processor_data['processor_params']['paid_order_status'] && $processor_data['processor_params']['transaction_method'] == 'hold') {
