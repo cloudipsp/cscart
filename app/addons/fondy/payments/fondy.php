@@ -62,9 +62,8 @@ if (defined('PAYMENT_NOTIFICATION')) {
     $pp_response = ['order_status' => ($processor_data['processor_params']['transaction_method'] == 'hold') ? $processor_data['processor_params']['status_hold'] : $processor_data['processor_params']['paid_order_status']];
     fn_finish_payment($order_id, $pp_response);
     fn_clear_cart($_SESSION['cart']);
-    fn_redirect('/cart');
+    fn_redirect('checkout.complete');
     exit();
-
 } else {
 
     if (empty($processor_data) && !empty($order_info)) {
